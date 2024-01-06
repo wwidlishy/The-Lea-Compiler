@@ -1,5 +1,6 @@
 # The-Lea-Compiler
-Just an repo for my programming language im making in python
+Just an repo for my programming language im making in python  
+(This is not a finished product and readme)  
 
 **I) Language's Concept**
 
