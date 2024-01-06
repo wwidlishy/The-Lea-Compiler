@@ -15,6 +15,18 @@ In Lea, we don't give a fuck about recursion limit (It is gone!, At the expense 
 Have you ever had problems with scope variable shit, well we fixed that.  
 All variables are global, even Arguments!  
 
+Here's how you can define, and free a variable!
+```sh
+## [Name]: [Flags split by space, Type flag is required] = [Value of the type]
+A: String = "Hello, World! I Like "
+echo $A + "\n"
+
+A = $A + "Lea!"
+echo $A + "\n"
+
+free A
+```
+
 That's why we have a _stack_ to save variables state
 ```sh
 A: Number = 13
