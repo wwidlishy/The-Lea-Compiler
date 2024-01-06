@@ -1,0 +1,7 @@
+textToEcho: String = "Hello, World!\n"
+echo $textToEcho
+
+textToEcho = "Lea is the future of scripting!\n"
+echo $textToEcho
+
+free textToEcho

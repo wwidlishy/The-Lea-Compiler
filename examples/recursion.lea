@@ -1,0 +1,15 @@
+## You can recurse forever, because this language is actually built right
+
+myRecursiveFunction:: arg1: Integer
+does
+    arg1 = $arg1 + 1
+    if $arg1 > 5
+    does
+        arg1 = 0
+    end
+
+    echo (toString $arg1) + "\n"
+    myRecursiveFunction $arg1
+end
+
+myRecursiveFunction 0
