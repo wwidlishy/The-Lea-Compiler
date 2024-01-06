@@ -1,0 +1,20 @@
+## Simple encrypted variable example
+
+## Content of this variable is encrypted by a special generated one-time key.
+## Might increase RAM usage by a few bytes
+## Might slow runtime
+## It is just an variable
+
+A: Encrypted String = 10
+
+echo $A
+
+## Simple costant variable example
+
+## It content cannot be changed in any way
+## It can be freed and then assigned as an not constant
+
+A: Constant String = 10
+
+echo $A
+## A = 9 ## Constant change error!
