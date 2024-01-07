@@ -8,7 +8,7 @@
 | windows*| :white_check_mark: |
 | darwin**| :x:                |
 
-* - I added this only because Im on this piece of OS shit, otherwise i wouldn't give a fuck
+\* - I added this only because Im on this piece of OS shit, otherwise i wouldn't give a fuck
 
 ** - No MacOS support because fuck apple shit, nobodys going to use it so why even bother. 
 
