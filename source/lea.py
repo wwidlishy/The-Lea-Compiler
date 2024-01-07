@@ -28,8 +28,8 @@ class Error:
 """
 
 class Lexer:
-    def __init__(self) -> None:
-        self.tokens, self.index, self.pos, self.line = [], -1, 0, 1
+    def __init__(self, pos=0, line=1) -> None:
+        self.tokens, self.index, self.pos, self.line = [], -1, pos, line
         self.mode, self.current = "", ""
 
     def lexicate(self, src) -> list:
@@ -49,7 +49,7 @@ class Lexer:
                         break
                 else:
                     self.make_number()
-                    sublexer = Lexer()
+                    sublexer = Lexer(self.pos, self.line)
                     self.tokens += sublexer.lexicate(self.src[self.index:])
                     break
 
@@ -67,7 +67,9 @@ class Lexer:
     def make_number(self) -> None:
         regex = [
             [re.compile("[0-9][0-9]?"), "int(self.current.lstrip('0'))"], # Int Number Type
-            [re.compile("[0-9]?\.[0-9]?"), "float(self.current.lstrip('0'))"] # Float Number Type
+            [re.compile("[0-9]?\.[0-9]?"), "float(self.current.lstrip('0'))"], # Float Number Type
+            [re.compile("0[xX][0-9a-fA-F]+"), "int(self.current, 16)"], # Hexadecimal Integer
+            [re.compile("0[bB][0-1]+"), "int(self.current, 2)"]  # Binary Integer
         ]
         number = None
         for rexpr, action in regex:
@@ -77,7 +79,7 @@ class Lexer:
         if number != None:
             self.tokens.append([self.mode, number])
         else:
-            error = Error(f"At {self.line}, {self.pos-len(self.current)}: Retarded Regex Error: Somehow you managed to find an issue with my regex.\nPlease open an issue at https://github.com/wwidlishy/The-Lea-Compiler/issues")
+            error = Error(f"At {self.line}, {self.pos}: Retarded Regex Error: Somehow you managed to find an issue with my regex.\nPlease open an issue at https://github.com/wwidlishy/The-Lea-Compiler/issues")
             error.interupt()
 """
     Run
