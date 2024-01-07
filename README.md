@@ -40,3 +40,21 @@ echo $A ## 14
 pop A
 echo $A ## 13
 ```
+
+**III) Number Types**
+
+There are:
+* Decimal Integers
+* Decimal Floats
+* Hexadecimal Integer (converted to decimal integer at compile time)
+* Binary Integer (converted to decimal integer at compile time)
+
+```sh
+10 ## 10
+
+10.2 ## 10.2
+
+0x1a ## 26
+
+0b101 ## 5
+```

@@ -11,6 +11,11 @@ import re
 DIGITS1 = "0123456789"
 DIGITS2 = ".xX0123456789AaBbCcDdEeFf"
 
+KEYWD0 = "qwertyuiopasdfghjklzxcvbnm_QWERTYUIOPASDFGHJKLZXCVBNM"
+KEYWD2 = KEYWD0 + DIGITS1
+
+NEWLNS = "\n;"
+
 """
     Error
 """
@@ -39,8 +44,12 @@ class Lexer:
             if self.mode == "":
                 if self._curchar() in DIGITS1:
                     self.mode = "number"
-                    self.current = self._curchar()
-                    continue
+                    self.current = ""
+                elif self._curchar() in KEYWD0:
+                    self.mode = "keyword"
+                    self.current = ""
+                elif self._curchar() in NEWLNS:
+                    self.tokens.append(['special', 'endline'])
             elif self.mode == "number":
                 if self._curchar() in DIGITS2:
                     self.current += self._curchar()
