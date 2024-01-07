@@ -16,7 +16,7 @@ KEYWD0 = "qwertyuiopasdfghjklzxcvbnm_QWERTYUIOPASDFGHJKLZXCVBNM"
 KEYWD2 = KEYWD0 + DIGITS1
 
 OPERS0 = ":!&|#+-*/=<>$.?"
-OPERS2 = ["::", "!", "&", "|", "##", "+", "-", "*", "**", "/", "//", "=", "==", "<", ">", "!=", "<=", ">=", "$", ".", "?"]
+OPERS2 = ["::", ":", "!", "&", "|", "##", "+", "-", "*", "**", "/", "//", "=", "==", "<", ">", "!=", "<=", ">=", "$", ".", "?"]
 
 NEWLNS = "\n;"
 
@@ -36,6 +36,7 @@ class Error:
     Lexer
 """
 
+# Todo: Comment system, Parentheses!
 class Lexer:
     def __init__(self, pos=0, line=1) -> None:
         self.tokens, self.index, self.pos, self.line = [], -1, pos, line
@@ -165,8 +166,10 @@ class GASM:
     def __init__(self) -> None:
         self.asm = asm.ASM.template[1]
         self.body = ""
-    def generate(self) -> str:
-        pass
+    def generate(self, order) -> str:
+        for line in order:
+            for token in line:
+                print(token)
 """
     Run
 """
@@ -189,4 +192,5 @@ tokens = lexer.lexicate(file)
 loc = LOC()
 order = loc.orderlns(tokens)
 
-print(order)
+gasm = GASM()
+asm = gasm.generate(order)
