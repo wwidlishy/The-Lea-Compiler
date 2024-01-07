@@ -1,8 +1,0 @@
-goto MyLabel
-echo "I'usseless"
-
-::MyLabel
-does
-    echo "Hello, World!\n"
-    goto MyLabel
-end

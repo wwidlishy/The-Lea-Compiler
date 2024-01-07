@@ -44,6 +44,9 @@ class Lexer:
             elif self.mode == "number":
                 if self._curchar() in DIGITS2:
                     self.current += self._curchar()
+                    if len(self.src) - self.index == 1:
+                        self.make_number()
+                        break
                 else:
                     self.make_number()
                     sublexer = Lexer()
