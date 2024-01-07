@@ -35,7 +35,7 @@ class Error:
 class Lexer:
     def __init__(self, pos=0, line=1) -> None:
         self.tokens, self.index, self.pos, self.line = [], -1, pos, line
-        self.mode, self.current = "", ""
+        self.mode, self.current, self.firstacc = "", "", False
 
     def lexicate(self, src) -> list:
         self.src = src
@@ -48,9 +48,13 @@ class Lexer:
                 elif self._curchar() in KEYWD0:
                     self.mode = "keyword"
                     self.current = ""
+                elif self._curchar() == '"':
+                    self.mode = "string"
+                    self.current = ""
+                    continue
                 elif self._curchar() in NEWLNS:
                     self.tokens.append(['special', 'endline'])
-            elif self.mode == "number":
+            if self.mode == "number":
                 if self._curchar() in DIGITS2:
                     self.current += self._curchar()
                     if len(self.src) - self.index == 1:
@@ -61,6 +65,29 @@ class Lexer:
                     sublexer = Lexer(self.pos, self.line)
                     self.tokens += sublexer.lexicate(self.src[self.index:])
                     break
+            if self.mode == "keyword":
+                if self._curchar() in KEYWD2:
+                    self.current += self._curchar()
+                    if len(self.src) - self.index == 1:
+                        self.tokens.append(['keyword', self.current])
+                else:
+                    self.tokens.append(['keyword', self.current])
+                    sublexer = Lexer(self.pos, self.line)
+                    self.tokens += sublexer.lexicate(self.src[self.index:])
+                    break
+            if self.mode == "string":
+                if self._curchar() == '"':
+                    self.tokens.append(['string', self.current])
+                    sublexer = Lexer(self.pos, self.line)
+                    self.tokens += sublexer.lexicate(self.src[self.index+1:])
+                    break
+                else:
+                    self.current += self._curchar()
+                if len(self.src) - self.index == 1:
+                    sublexer = Lexer(self.pos, self.line)
+                    self.tokens += sublexer.lexicate(self.src[self.index+1:])
+                    break
+                
 
         return self.tokens
     def _advance(self) -> None:
