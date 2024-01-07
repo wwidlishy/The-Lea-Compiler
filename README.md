@@ -11,6 +11,8 @@ When I used other languages, I was quite annoyed that you can't recurse forever.
 So, I decided to fix that.  
 In Lea, we don't give a fuck about recursion limit (It is gone!, At the expense of binary size).
 
+Lea requires `nasm` and `gcc` in the path to work properly
+
 **II) Variables**
 
 Have you ever had problems with scope variable shit, well we fixed that.  

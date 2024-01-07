@@ -2,6 +2,7 @@
     Imports
 """
 import os, sys
+import asm
 import re
 
 """
@@ -139,6 +140,33 @@ class Lexer:
         else:
             error = Error(f"At {self.line}, {self.pos}: Retarded Regex Error: Somehow you managed to find an issue with my regex.\nPlease open an issue at https://github.com/wwidlishy/The-Lea-Compiler/issues")
             error.interupt()
+
+"""
+    LOC (Line Organizer Class)
+"""
+
+class LOC:
+    def __init__(self) -> None:
+        pass
+    def orderlns(self, tokens) -> list:
+        index, current, order = -1, [], []
+        for i in tokens:
+            index += 1
+            if i == ['special', 'endline']:
+                order.append(current)
+                current = []
+            else:
+                current.append(i)
+
+        order.append(current)
+        return order
+    
+class GASM:
+    def __init__(self) -> None:
+        self.asm = asm.ASM.template[1]
+        self.body = ""
+    def generate(self) -> str:
+        pass
 """
     Run
 """
@@ -157,4 +185,8 @@ else:
 
 lexer = Lexer()
 tokens = lexer.lexicate(file)
-print(tokens)
+
+loc = LOC()
+order = loc.orderlns(tokens)
+
+print(order)
