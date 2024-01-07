@@ -14,6 +14,9 @@ DIGITS2 = ".xX0123456789AaBbCcDdEeFf"
 KEYWD0 = "qwertyuiopasdfghjklzxcvbnm_QWERTYUIOPASDFGHJKLZXCVBNM"
 KEYWD2 = KEYWD0 + DIGITS1
 
+OPERS0 = ":!&|#+-*/=<>$.?"
+OPERS2 = ["::", "!", "&", "|", "##", "+", "-", "*", "**", "/", "//", "=", "==", "<", ">", "!=", "<=", ">=", "$", ".", "?"]
+
 NEWLNS = "\n;"
 
 """
@@ -37,7 +40,7 @@ class Lexer:
         self.tokens, self.index, self.pos, self.line = [], -1, pos, line
         self.mode, self.current, self.firstacc = "", "", False
 
-    def lexicate(self, src) -> list:
+    def lexicate(self, src, rp_bullshit=False) -> list:
         self.src = src
         while len(self.src) - self.index != 1:
             self._advance()
@@ -48,10 +51,14 @@ class Lexer:
                 elif self._curchar() in KEYWD0:
                     self.mode = "keyword"
                     self.current = ""
+                elif self._curchar() in OPERS0:
+                    self.mode = "operator"
+                    self.current = ""
                 elif self._curchar() == '"':
                     self.mode = "string"
                     self.current = ""
                     continue
+
                 elif self._curchar() in NEWLNS:
                     self.tokens.append(['special', 'endline'])
             if self.mode == "number":
@@ -87,7 +94,22 @@ class Lexer:
                     sublexer = Lexer(self.pos, self.line)
                     self.tokens += sublexer.lexicate(self.src[self.index+1:])
                     break
-                
+            if self.mode == "operator":
+                if self._curchar() in OPERS0:
+                    self.current += self._curchar()
+                    if len(self.src) - self.index == 1:
+                        if self.current not in OPERS2:
+                            error = Error(f"At {self.line}, {self.pos}: Invalid Operator '{self.current}'")
+                            error.interupt()
+                        self.tokens.append(['operator', self.current])
+                else:
+                    if self.current not in OPERS2:
+                        error = Error(f"At {self.line}, {self.pos}: Invalid Operator '{self.current}'")
+                        error.interupt()
+                    self.tokens.append(['operator', self.current])
+                    sublexer = Lexer(self.pos, self.line)
+                    self.tokens += sublexer.lexicate(self.src[self.index:])
+                    break
 
         return self.tokens
     def _advance(self) -> None:
