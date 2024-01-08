@@ -56,13 +56,16 @@ class Lexer:
                 elif self._curchar() in OPERS0:
                     self.mode = "operator"
                     self.current = ""
+                elif self._curchar() in "()[]{}":
+                    self.tokens.append(['special', self._curchar()])
+                    continue
                 elif self._curchar() == '"':
                     self.mode = "string"
                     self.current = ""
                     continue
-
                 elif self._curchar() in NEWLNS:
                     self.tokens.append(['special', 'endline'])
+
             if self.mode == "number":
                 if self._curchar() in DIGITS2:
                     self.current += self._curchar()
@@ -84,7 +87,11 @@ class Lexer:
                     sublexer = Lexer(self.pos, self.line)
                     self.tokens += sublexer.lexicate(self.src[self.index:])
                     break
+
             if self.mode == "string":
+                if self._curchar() == "\n":
+                    error = Error(f"At  {self.line},  {self.pos}: EOL String Error!")
+                    error.interupt()
                 if self._curchar() == '"':
                     self.tokens.append(['string', self.current])
                     sublexer = Lexer(self.pos, self.line)
@@ -92,10 +99,14 @@ class Lexer:
                     break
                 else:
                     self.current += self._curchar()
+                    if len(self.src) - self.index == 1:
+                        error = Error(f"At  {self.line},  {self.pos}: EOF String Error!")
+                        error.interupt()
                 if len(self.src) - self.index == 1:
                     sublexer = Lexer(self.pos, self.line)
                     self.tokens += sublexer.lexicate(self.src[self.index+1:])
                     break
+
             if self.mode == "operator":
                 if self._curchar() in OPERS0:
                     self.current += self._curchar()
@@ -126,8 +137,8 @@ class Lexer:
     
     def make_number(self) -> None:
         regex = [
-            [re.compile("[0-9][0-9]?"), "int(self.current.lstrip('0'))"], # Int Number Type
-            [re.compile("[0-9]?\.[0-9]?"), "float(self.current.lstrip('0'))"], # Float Number Type
+            [re.compile("[0-9][0-9]?"), "int(self.current.lstrip('0')) if self.current.lstrip('0') != '' else 0"], # Int Number Type
+            [re.compile("[0-9]?\.[0-9]?"), "float(self.current.lstrip('0')) if self.current.lstrip('0') != '' else 0"], # Float Number Type
             [re.compile("0[xX][0-9a-fA-F]+"), "int(self.current, 16)"], # Hexadecimal Integer
             [re.compile("0[bB][0-1]+"), "int(self.current, 2)"]  # Binary Integer
         ]
@@ -162,14 +173,18 @@ class LOC:
         order.append(current)
         return order
     
-class GASM:
+"""
+    ORG (Organizer)
+"""
+
+class ORG:
     def __init__(self) -> None:
-        self.asm = asm.ASM.template[1]
-        self.body = ""
-    def generate(self, order) -> str:
-        for line in order:
-            for token in line:
-                print(token)
+        pass
+    def organize(self, tokens) -> list:
+        for token in tokens:
+            print(token)
+    def organize_all(self, order) -> list:
+        return [self.organize(line) for line in order]
 """
     Run
 """
@@ -192,5 +207,5 @@ tokens = lexer.lexicate(file)
 loc = LOC()
 order = loc.orderlns(tokens)
 
-gasm = GASM()
-asm = gasm.generate(order)
+org = ORG()
+organized = org.organize_all(order)

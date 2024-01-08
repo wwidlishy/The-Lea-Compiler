@@ -8,8 +8,8 @@ does
         arg1 = 0
     end
 
-    echo (toString $arg1) + "\n"
-    myRecursiveFunction $arg1
+    echo($arg1 >>> String + "\n")
+    myRecursiveFunction($arg1)
 end
 
-myRecursiveFunction 0
+myRecursiveFunction(0)

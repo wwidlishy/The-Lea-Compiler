@@ -1,0 +1,6 @@
+linux
+    nasm -f elf $.asm -o $.o
+    gcc -m32 $.o -o $
+windows
+    nasm -f win32 $.asm -o $.o
+    gcc -m32 $.o -o $.exe

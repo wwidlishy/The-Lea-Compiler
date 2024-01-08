@@ -36,3 +36,12 @@ _main:
     "nasm -f elf64 filename.asm -o filename.o && gcc filename.o -o filename",
     "nasm -f win32 filename.asm -o filename.o && gcc filename.o -o filename.exe"
 ]
+
+class GASM:
+    def __init__(self) -> None:
+        self.asm = ASM.template[1]
+        self.body = ""
+    def generate(self, order) -> str:
+        for line in order:
+            for token in line:
+                pass #orgazm

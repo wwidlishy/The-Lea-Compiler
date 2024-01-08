@@ -1,5 +1,5 @@
 goto MyLabel
-echo "I'usseless"
+echo("I'usseless")
 
 ::MyCheckpoint
 echo "Hello, World!\n"

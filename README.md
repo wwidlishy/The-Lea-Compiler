@@ -22,10 +22,10 @@ Here's how you can define, and free a variable!
 ```sh
 ## [Name]: [Flags split by space, Type flag is required] = [Value of the type]
 A: String = "Hello, World! I Like "
-echo $A + "\n" ## Hello, World! I Like
+echo($A + "\n")  ## Hello, World! I Like
 
 A = $A + "Lea!"
-echo $A + "\n" ## Hello, World! I Like Lea!
+echo($A + "\n")  ## Hello, World! I Like Lea!
 
 free A
 ```
@@ -33,14 +33,14 @@ free A
 That's why we have a _stack_ to save variables state
 ```sh
 A: Number = 13
-echo $A ## 13
+echo($A) ## 13
 
 push A
 A = 14
-echo $A ## 14
+echo($A) ## 14
 
 pop A
-echo $A ## 13
+echo($A) ## 13
 ```
 
 **III) Number Types**
