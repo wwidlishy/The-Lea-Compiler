@@ -177,12 +177,20 @@ class LOC:
     ORG (Organizer)
 """
 
+# Kinda lost it writing this class
+# So I blyatified variables ... BLYAAAA!
+
 class ORG:
     def __init__(self) -> None:
-        pass
+        self.mode = 0 # 0 - Being Usseless, 1 - Doing(), 2
+        self.order_blyat = []
+        self.pcounter_blayt = 0
     def organize(self, tokens) -> list:
         for token in tokens:
-            print(token)
+            if self.mode == 0:
+                if token in '(':
+                    self.mode = 1
+                    self.pcounter_blayt = 1
     def organize_all(self, order) -> list:
         return [self.organize(line) for line in order]
 """
