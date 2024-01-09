@@ -17,4 +17,4 @@ echo($A)
 A: Constant String = 10
 
 echo($A)
-## A = 9 ## Constant change error!
+exit(0)

@@ -1,6 +1,6 @@
 ## You can recurse forever, because this language is actually built right
 
-myRecursiveFunction:: arg1: Number
+myRecursiveFunction Number:: arg1: Number
 does
     arg1 = $arg1 + 1
     if $arg1 > 5
@@ -13,3 +13,4 @@ does
 end
 
 myRecursiveFunction(0)
+exit(0) ## shouldn't happen

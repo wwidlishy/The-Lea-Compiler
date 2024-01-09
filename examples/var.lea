@@ -5,3 +5,4 @@ textToEcho = "Lea is the future of scripting!\n"
 echo($textToEcho)
 
 free textToEcho
+exit(0)

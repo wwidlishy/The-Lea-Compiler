@@ -1,0 +1,19 @@
+## Just A wrapper for The C Standard Library ngl
+
+@linux #! extern printf
+@windows #! extern _printf
+
+@linux #! extern exit
+@windows #! extern _exit
+
+echo Void:: text: String
+does
+    @linux #! call printf
+    @windows #! call _printf
+end
+
+exit Void:: exit_code: Integer
+does
+    @linux #! call exit
+    @windows #! call _exit
+end

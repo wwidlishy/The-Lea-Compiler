@@ -185,14 +185,49 @@ class ORG:
         self.mode = 0 # 0 - Being Usseless, 1 - Doing(), 2
         self.order_blyat = []
         self.pcounter_blayt = 0
+        self.current_blyat = []
     def organize(self, tokens) -> list:
+        self.order_blyat = []
+        self.current_blyat = []
+        self.pcounter_blayt = 0
+        self.mode = 0
         for token in tokens:
             if self.mode == 0:
-                if token in '(':
+                if token == ['special', '(']:
                     self.mode = 1
                     self.pcounter_blayt = 1
+                    self.current_blyat = []
+                    continue
+                else:
+                    self.order_blyat.append(token)
+            if self.mode == 1:
+                if token == ['special', '(']:
+                    self.pcounter_blayt += 1
+                if token == ['special', ')']:
+                    self.pcounter_blayt -= 1
+                
+                if self.pcounter_blayt == 0:
+                    self.mode = 0
+                    self.order_blyat.append(['tuple', ORG().organize(self.current_blyat)])
+                else:
+                    self.current_blyat.append(token)
+        if self.pcounter_blayt != 0: return Error("At $: Parentheses Error")
+
+        return self.order_blyat
     def organize_all(self, order) -> list:
-        return [self.organize(line) for line in order]
+        self.order_blyat = []
+        self.current_blyat = []
+        self.pcounter_blayt = 0
+        self.mode = 0
+        orderer = []
+        for index, tokens in enumerate(order):
+            line = index + 1
+            tokens = self.organize(tokens)
+            if isinstance(tokens, Error):
+                tokens.message = tokens.message.replace("$", str(line))
+                tokens.interupt()
+            orderer.append(tokens)
+        return orderer
 """
     Run
 """
@@ -217,3 +252,5 @@ order = loc.orderlns(tokens)
 
 org = ORG()
 organized = org.organize_all(order)
+
+print(organized)

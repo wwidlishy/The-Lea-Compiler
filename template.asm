@@ -1,12 +1,13 @@
 ; Generated with lea
 
+@linux ; nasm -f elf $.asm -o $.o;
+@linux ; gcc -m32 $.o -o $;
+@windows ; nasm -f win32 $.asm -o $.o;
+@windows ; gcc -m32 $.o -o $.exe
+
 section .text
 @linux    global main
 @windows    global _main
-
-    ; Imports
-@linux    extern printf
-@windows    global _printf
 
 @linux    jmp main
 @windows    jmp _main
@@ -20,11 +21,7 @@ $functions
 $tempcontants
 
 ; Body
-@linux:main:
+@linux main:
+@windows _main:
 $body
-
-@linux:    mov eax, 1
-@linux:    xor ebx, ebx
-@linux:    int 0x80
-
     ret

@@ -1,0 +1,12 @@
+## For safety reasons, don't use anything starting with __lea
+## Don't use also _main and main
+## And any c stdantard library name, with or without the _ as prefix
+
+#! message: db 'Hello, World!', 10, 0
+#! message_end:
+
+#! push message
+@linux #! call printf
+@windows #! call _printf
+
+exit(0)
