@@ -26,8 +26,8 @@ echo($A + "\n")  ## Hello, World! I Like
 
 A = $A + "Lea!"
 echo($A + "\n")  ## Hello, World! I Like Lea!
-
 free A
+exit(0)
 ```
 
 That's why we have a _stack_ to save variables state
@@ -41,6 +41,7 @@ echo($A) ## 14
 
 pop A
 echo($A) ## 13
+exit(0)
 ```
 
 **III) Number Types**
