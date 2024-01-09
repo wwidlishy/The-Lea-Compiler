@@ -12,6 +12,10 @@ does
     @windows #! call _printf
 end
 
+memch Void:: address: Integer, value: Integer
+does
+    #! mov [{$address}], {$value}
+end
 exit Void:: exit_code: Integer
 does
     @linux #! call exit
