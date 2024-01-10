@@ -1,4 +1,4 @@
-goto MyLabel
+goto MyCheckpoint
 echo("I'usseless")
 
 ::MyCheckpoint

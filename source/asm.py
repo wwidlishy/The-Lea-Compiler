@@ -22,5 +22,3 @@ class GASM:
         for line in order:
             for token in line:
                 pass #orgazm
-
-print(GASM([0, 0, "windows"]).asm)

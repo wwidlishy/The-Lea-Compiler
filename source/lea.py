@@ -36,7 +36,6 @@ class Error:
     Lexer
 """
 
-# Todo: Comment system, Parentheses!
 class Lexer:
     def __init__(self, pos=0, line=1) -> None:
         self.tokens, self.index, self.pos, self.line = [], -1, pos, line
