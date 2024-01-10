@@ -114,15 +114,26 @@ class Lexer:
                         if self.current not in OPERS2:
                             error = Error(f"At {self.line}, {self.pos}: Invalid Operator '{self.current}'")
                             error.interupt()
-                        self.tokens.append(['operator', self.current])
+                        if self.current != "##":
+                            self.tokens.append(['operator', self.current])
+                        else:
+                            self.mode = "comment"
+                            continue
                 else:
                     if self.current not in OPERS2:
                         error = Error(f"At {self.line}, {self.pos}: Invalid Operator '{self.current}'")
                         error.interupt()
-                    self.tokens.append(['operator', self.current])
+                    if self.current != "##":
+                        self.tokens.append(['operator', self.current])
+                    else:
+                        self.mode = "comment"
+                        continue
                     sublexer = Lexer(self.pos, self.line)
                     self.tokens += sublexer.lexicate(self.src[self.index:])
                     break
+            if self.mode == "comment":
+                if self._curchar() == "\n":
+                    self.mode = ""
 
         return self.tokens
     def _advance(self) -> None:

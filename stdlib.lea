@@ -1,23 +1,23 @@
 ## Just A wrapper for The C Standard Library ngl
 
-@linux #! extern printf
-@windows #! extern _printf
+__asm_addln("extern printf", "linux")
+__asm_addln("extern _printf", "windows")
 
-@linux #! extern exit
-@windows #! extern _exit
+__asm_addln("extern exit", "linux")
+__asm_addln("extern _exit", "windows")
 
 echo Void:: text: String
 does
-    @linux #! call printf
-    @windows #! call _printf
+    __asm_addln("call printf", "linux")
+    __asm_addln("call _printf", "windows")
 end
 
 memch Void:: address: Integer, value: Integer
 does
-    #! mov [{$address}], {$value}
+    __asm_addln("mov [%Integer], %Integer" % ($address, $value))
 end
 exit Void:: exit_code: Integer
 does
-    @linux #! call exit
-    @windows #! call _exit
+    __asm_addln("call exit", "linux")
+    __asm_addln("call _exit", "windows")
 end
