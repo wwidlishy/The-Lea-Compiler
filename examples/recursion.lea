@@ -9,6 +9,8 @@ does
     end
 
     echo($arg1 >>> String + "\n")
+    result: Number = $arg1
+    
     myRecursiveFunction($arg1)
 end
 

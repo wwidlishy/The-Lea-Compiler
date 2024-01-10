@@ -1,47 +1,26 @@
 class ASM:
-    # 0 linux 1 windows
-    template = \
-[
-"""global _start
-
-section .text
-
-_start:
-###BODY###
-
-  mov rax, 60  
-  mov rdi, 0 
-  syscall          
-""",
-"""    global _main
-    extern  _GetStdHandle@4
-    extern  _WriteFile@20
-    extern  _ExitProcess@4
-
-    section .text
-_main:
-    mov     ebp, esp
-    sub     esp, 4
-
-###BODY###
-
-    push    0
-    call    _ExitProcess@4
-
-    hlt
-"""
-]
-    build_process = \
-[
-    "nasm -f elf64 filename.asm -o filename.o && gcc filename.o -o filename",
-    "nasm -f win32 filename.asm -o filename.o && gcc filename.o -o filename.exe"
-]
-
+    def template(argv):
+        result = ""
+        for i in open("template.asm", "r").read().split("\n"):
+            if len(i) == 0:
+                result += "\n"
+                continue
+            if i[0:len(f"@{argv[2]}")] == f"@{argv[2]}":
+                result += i[len(f"@{argv[2]}")+1:] + "\n"
+                continue
+            if i[0] == "@":
+                continue
+            else:
+                result += i + "\n"
+        return result
+    
 class GASM:
-    def __init__(self) -> None:
-        self.asm = ASM.template[1]
+    def __init__(self, argv) -> None:
+        self.asm = ASM.template(argv)
         self.body = ""
     def generate(self, order) -> str:
         for line in order:
             for token in line:
                 pass #orgazm
+
+print(GASM([0, 0, "windows"]).asm)

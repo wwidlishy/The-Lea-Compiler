@@ -224,6 +224,14 @@ class ORG:
                     self.current_blyat.append(token)
         if self.pcounter_blayt != 0: return Error("At $: Parentheses Error")
 
+        function_calls = self.checkforcon(self.order_blyat, ['keyword', 'tuple'])
+        if len(function_calls) != 0:
+            pairs = [[i, i+1] if i+1 in range(len(function_calls)) else None for i in range(len(function_calls))]
+            while None in pairs: pairs.remove(None)
+            
+            for i in pairs:
+                self.order_blyat[i[0]] = ['call', self.order_blyat[i[0]][1], self.order_blyat[i[1]][1]]
+                del self.order_blyat[i[1]]
         return self.order_blyat
     def organize_all(self, order) -> list:
         self.order_blyat = []
@@ -239,6 +247,18 @@ class ORG:
                 tokens.interupt()
             orderer.append(tokens)
         return orderer
+    def checkforcon(self, line, token_types):
+        index = 0
+        result = []
+        for _index, i in enumerate(line):
+            if i == []: continue
+            if index != 0 and i[0] != token_types[index]:
+                result = result[:len(result)-index]
+                index = 0
+            if i[0] == token_types[index]:
+                result.append(_index)
+                index += 1
+        return result
 """
     Run
 """

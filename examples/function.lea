@@ -1,5 +1,5 @@
 doSomeStuff Number:: arg1: Number, arg2: Number; does
-    return $arg1 + $arg2
+    result: Number = $arg1 + $arg2
 end
 
 doSomeStuff(3, 2)
@@ -7,7 +7,7 @@ echo($^)             ## $^ indicates return value of last line
 
 doSomeMoreStuff Number:: arg1: Number, arg2: Number
 does
-    return $arg1 * $arg2
+    result: Number = $arg1 * $arg2
 end
 
 echo(doSomeMoreStuff (3, 2))

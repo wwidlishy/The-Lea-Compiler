@@ -1,4 +1,0 @@
-nasm -f elf $.asm -o $.o;
-gcc -m32 $.o -o $;
-nasm -f win32 $.asm -o $.o;
-gcc -m32 $.o -o $.exe
