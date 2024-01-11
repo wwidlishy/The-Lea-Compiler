@@ -1,0 +1,52 @@
+## variables are stored in the stack
+
+import stdlib
+import stack
+
+a: Integer = 10                 ## assings 10 to a's place in the stack
+a_location: Integer = 0     ## initialize a_location
+push a, a_location             ## create a independant copy of a, and save its address into a_location
+
+free a                                      ## deletes a from the stack, its copy stays
+b: Integer = load(a_location)     ## loads value from a_location into b, so b = a
+b = 2 * b
+
+echo(b) ## 20
+free b
+
+## or shorter
+
+c: Integer = 10
+d: Integer = 0
+push c, d
+d = load(d) * 2
+free c
+
+echo(d)
+free d
+
+## or even shorter
+
+e: Integer = 10
+f: Integer = e * 2
+free e
+echo(f)
+
+free f
+
+## you can modify, load, add and remove in the stack
+## @[variable name] returns locations of variable in the stack
+
+g: Integer = 5
+modify(@g, g + 1)               ## g = 6
+
+new_cell: Integer = add()   ## adds cell to the stack, returns its address
+modify(new_cell, g + 1)       ## 7 at new_cell
+
+g = load(new_cell)              ## g = 7
+echo(g)
+
+remove()                            ## removes a cell
+
+free new_cell
+free g

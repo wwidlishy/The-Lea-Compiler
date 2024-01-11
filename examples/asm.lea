@@ -4,12 +4,12 @@ import stdlib
 ## Don't use also _main and main
 ## And any c stdantard library name, with or without the _ as prefix
 
-__asm_addln("message: db 'Hello, World!', 10, 0")
-__asm_addln("message_end:")
-__asm_addln("push message")
+asm("message: db 'Hello, World!', 10, 0")
+asm("message_end:")
+asm("push message")
 
 
-__asm_addln("call printf", "linux")
-__asm_addln("call _printf", "windows")
+asm("call printf", "linux")
+asm("call _printf", "windows")
 
 exit(0)

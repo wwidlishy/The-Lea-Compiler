@@ -201,6 +201,10 @@ class ORG:
         self.current_blyat = []
         self.pcounter_blayt = 0
         self.mode = 0
+
+        if isinstance(tokens, Error):
+            return tokens
+        
         for token in tokens:
             if self.mode == 0:
                 if token == ['special', '(']:
@@ -229,7 +233,23 @@ class ORG:
             while None in pairs: pairs.remove(None)
             
             for i in pairs:
-                self.order_blyat[i[0]] = ['call', self.order_blyat[i[0]][1], self.order_blyat[i[1]][1]]
+                a = ORG().organize(self.order_blyat[i[1]][1])
+                if isinstance(a, Error):
+                    return a
+                self.order_blyat[i[0]] = ['call', self.order_blyat[i[0]][1], a]
+                del self.order_blyat[i[1]]
+
+        str_op = self.checkforcon(self.order_blyat, ['string', 'operator', 'string'])
+        if len(str_op) != 0:
+            pairs = [[i, i+1, i+2] if i+2 in range(len(str_op)) else None for i in range(len(str_op))]
+            while None in pairs: pairs.remove(None)
+            
+            for i in pairs:
+                if self.order_blyat[i[1]][1] == "+":
+                    self.order_blyat[i[0]] = ['string', self.order_blyat[i[0]][1] + self.order_blyat[i[2]][1]]
+                else:
+                    return Error(f"At $: Unsupported String operation!\n\t\"{self.order_blyat[i[0]][1]}\" {self.order_blyat[i[1]][1]} \"{self.order_blyat[i[2]][1]}\"\n\t{'~'*(len(self.order_blyat[i[0]][1])+2)} {'^'*len(self.order_blyat[i[1]][1])} {'~'*(len(self.order_blyat[i[2]][1])+2)}")
+                del self.order_blyat[i[1]]
                 del self.order_blyat[i[1]]
         return self.order_blyat
     def organize_all(self, order) -> list:
