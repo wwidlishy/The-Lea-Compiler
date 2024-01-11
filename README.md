@@ -20,6 +20,8 @@ All variables are global, even Arguments!
 
 Here's how you can define, and free a variable!
 ```sh
+import stdlib
+
 ## [Name]: [Flags split by space, Type flag is required] = [Value of the type]
 A: String = "Hello, World! I Like "
 echo(A + "\n")  ## Hello, World! I Like
@@ -32,6 +34,8 @@ exit(0)
 
 That's why we have a _stack_ to save variables state
 ```sh
+import stdlib
+
 A: Number = 13
 echo(A) ## 13
 
