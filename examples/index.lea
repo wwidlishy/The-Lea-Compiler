@@ -1,5 +1,5 @@
 text: String = "Hello, World!\n"
-firstChar: String = $text(0) ## "H"
+firstChar: String = text[0] ## "H"
 
-echo($firstChar)
+echo(firstChar)
 exit(0)

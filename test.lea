@@ -1,2 +1,2 @@
-echo("Hello, World!")
+echo("Hello, World!" + "\n")
 exit(0)

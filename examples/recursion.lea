@@ -1,17 +1,15 @@
 ## You can recurse forever, because this language is actually built right
 
-myRecursiveFunction Number:: arg1: Number
+myRecursiveFunction Number 1:: Number
 does
-    arg1 = $arg1 + 1
-    if $arg1 > 5
+    arg[0] = arg[0] + 1
+    if arg[0] > 5
     does
-        arg1 = 0
+        arg[0] = 0
     end
 
-    echo($arg1 >>> String + "\n")
-    result: Number = $arg1
-    
-    myRecursiveFunction($arg1)
+    echo(arg[0] >>> String + "\n")
+    result: Number = myRecursiveFunction(arg[0])
 end
 
 myRecursiveFunction(0)

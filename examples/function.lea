@@ -1,12 +1,12 @@
-doSomeStuff Number:: arg1: Number, arg2: Number; does
-    result: Number = $arg1 + $arg2
+doSomeStuff Number 2:: Number, Number; does
+    result: Number = arg[0] + arg[1]
 end
 
 echo(doSomeStuff(3, 2))
 
-doSomeMoreStuff Number:: arg1: Number, arg2: Number
+doSomeMoreStuff Number 2:: Number, Number
 does
-    result: Number = $arg1 * $arg2
+    result: Number = arg[0] * arg[1]
 end
 
 echo(doSomeMoreStuff (3, 2))
