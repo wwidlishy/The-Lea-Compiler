@@ -6,17 +6,19 @@ __asm_addln("extern _printf", "windows")
 __asm_addln("extern exit", "linux")
 __asm_addln("extern _exit", "windows")
 
-echo Void:: text: String
+echo Void 1:: String
 does
     __asm_addln("call printf", "linux")
     __asm_addln("call _printf", "windows")
 end
 
-memch Void:: address: Integer, value: Integer
+## adress, value
+memch Void 2:: Integer, Integer
 does
-    __asm_addln("mov [%Integer], %Integer" % ($address, $value))
+    __asm_addln("mov [%Integer], %Integer" % (arg[0], arg[1]))
 end
-exit Void:: exit_code: Integer
+
+exit Void 1 :: Integer
 does
     __asm_addln("call exit", "linux")
     __asm_addln("call _exit", "windows")
