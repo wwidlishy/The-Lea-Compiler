@@ -1,3 +1,5 @@
+import stdlib
+
 text: String = "Hello, World!\n"
 firstChar: String = text[0] ## "H"
 

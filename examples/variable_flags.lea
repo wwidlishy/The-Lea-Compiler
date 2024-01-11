@@ -3,7 +3,9 @@
 ## Content of this variable is encrypted by a special generated one-time key.
 ## Might increase RAM usage by a few bytes
 ## Might slow runtime
-## It is just an variable
+import stdlib
+
+## It is just an variable, but safer and slower
 
 A: Encrypted String = 10
 

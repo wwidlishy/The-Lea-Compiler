@@ -1,5 +1,7 @@
 ## You can recurse forever, because this language is actually built right
 
+import stdlib
+
 myRecursiveFunction Number 1:: Number
 does
     arg[0] = arg[0] + 1

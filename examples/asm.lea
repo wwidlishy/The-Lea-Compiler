@@ -1,3 +1,5 @@
+import stdlib
+
 ## For safety reasons, don't use anything starting with __lea
 ## Don't use also _main and main
 ## And any c stdantard library name, with or without the _ as prefix

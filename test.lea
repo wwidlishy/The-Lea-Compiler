@@ -1,2 +1,4 @@
+import stdlib
+
 echo("Hello, World!" + "\n")
 exit(0)
