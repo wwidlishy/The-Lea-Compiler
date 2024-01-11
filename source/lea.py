@@ -244,6 +244,8 @@ class ORG:
             if isinstance(tokens, Error):
                 tokens.message = tokens.message.replace("$", str(line))
                 tokens.interupt()
+            if tokens == []:
+                continue
             orderer.append(tokens)
         return orderer
     def checkforcon(self, line, token_types):
