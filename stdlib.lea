@@ -12,12 +12,6 @@ does
     __asm_addln("call _printf", "windows")
 end
 
-## adress, value
-memch Void 2:: Integer, Integer
-does
-    __asm_addln("mov [%Integer], %Integer" % (arg[0], arg[1]))
-end
-
 exit Void 1 :: Integer
 does
     __asm_addln("call exit", "linux")
