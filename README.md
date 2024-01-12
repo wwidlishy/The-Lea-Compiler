@@ -10,7 +10,7 @@ However lacks the *_wierd_* bash syntax, and other unintuitive features.
 Don't worry, we've got our own syntax bullshit. 😊    
 When I used other languages, I was quite annoyed that you can't recurse forever.  
 So, I decided to fix that.  
-In Lea, we don't give a fuck about recursion limit (It is gone!, At the expense of binary size).
+In Lea, we don't give a fuck about recursion limit (It is gone!)
 
 Lea requires `nasm` and `gcc` in the path to work properly
 
