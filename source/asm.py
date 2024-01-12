@@ -35,7 +35,8 @@ def gen_asm(argv1, order):
                     if len(tokens) == 1:
                         if tokens[0][0] == "number":
                             assembly += Functions.syscall(60,tokens[0][1])
-    
+                            return assembly
+    assembly += "\n\nmov rax, 60\nmov rdi, 0\nsyscall"
     return assembly
 
 def gen_file(argv1, assembly):

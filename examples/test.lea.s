@@ -7,25 +7,8 @@ bits 64
 global _start
 jmp _start
 
-exit:
-    fi_0:
-        push rax
-    fb_0:
-        mov rax, 60
-        syscall
-    fe_0:
-        pop rax
-        jmp rsi
-
 _start:
+mov rax, 60
+mov rdi, 0
 
-fc_0:
-    push rdi
-    push rsi
-
-    mov rdi, 2
-    mov rsi, fce_0
-    jmp exit
-fce_0:
-    pop rdi
-    pop rsi
+syscall
