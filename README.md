@@ -3,6 +3,22 @@ Just an repo for my programming language im making in python
 (This is not a finished product and readme)  
 (May include concepts that are not finished yet!)  
 
+**Functional Patterns**
+
+If you do not understand this syntax, check [Function Syntax](#functions)
+
+```sh
+## You can pass functions as arguments with & before function name
+function_caller :: 1
+does
+    loc[0] = arg[0](15)
+    echo(loc[0] >>> String)
+end
+
+add_five :: 1 = arg[0] + 5
+function_caller(&add_five)
+```
+
 **I) Language's Concept**
 
 Lea has a [Bash](https://github.com/topics/bash) like strongly typed syntax.  
@@ -60,6 +76,8 @@ There are:
 0b101 ## 5
 ```
 
+## Functions
+
 **IV) Functions**
 
 Btw, you can emulate a new line by a `;`  
@@ -89,6 +107,12 @@ echo(inc_n_times(Number) >>> String) ## 11
 inc_n_times :: 1 = arg[0] + 2
 echo(inc_n_times(Number) >>> String) ## 12
 ```
+
+Every function when called creates three variables (It is not recommended to assign any value at that name outside of a function):
+1) A list of local values: `loc`
+2) A list of arguments:  `arg`
+3) A returned value:  `result`  
+(all of those will be deleted on function return)
 
 **V) Loops & Checkpoints**
 
@@ -136,7 +160,27 @@ In Lea there are no loops, but you can achive the same output with checkpoints a
 
     ```
 
-**Just to piss you of, But true**
+**VI) Error Catching**
+
+Errors at runtime don't exit, they save the error code to a variable called `error`.  
+It is not recomended to use it for storing data.
+
+For example, conversion error detection
+```sh
+var string = "Can't be Number"
+var number = string >>> Number
+
+## Note: Else / Elsif must be in the same line as end of if / elsif
+
+if error == "ConvertionError"
+does
+    echo(formats("Error: Unable to convert '%0' to Number, Invalid Number Literal", [string]))
+    exit(0)
+end else
+    echo(number >>> String)
+end
+```
+**Just to piss you off, But true**
 
 This language was started just after the start of 2024 ... By a 14yo, without any help from AI  
 Bet ya pissed mate, massive skill issue! (you can open an issue on it, idc)

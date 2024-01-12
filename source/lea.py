@@ -284,10 +284,10 @@ class ORG:
     Run
 """
 
-if len(sys.argv) == 4:
+if len(sys.argv) == 2:
     pass
 else:
-    error = Error(f"Invalid usage: Insufficient Argument Count: Expected 1, but recived {len(sys.argv)-1}\nUsage: lea [input] [param] [output]\n\nlinux => Transpiles to asm, linux assembly\nwindows => Transpiles to asm, windows assembly\nother => Transpiles to asm")
+    error = Error(f"Invalid usage: Insufficient Argument Count: Expected 1, but recived {len(sys.argv)-1}\nUsage: lea [input]")
     error.interupt()
 
 if os.path.exists(sys.argv[1]):
