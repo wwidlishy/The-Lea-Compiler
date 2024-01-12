@@ -76,3 +76,62 @@ fun2 :: 2 = arg[0] - arg[1]
 echo(fun1(3, 2))
 echo(fun2(5, 2))
 ```
+
+Remember that you can reasign variables?  
+You can do the same with functions
+
+```sh
+const var Number = 10
+
+inc_n_times :: 1 = arg[0] + 1
+echo(inc_n_times(Number) >>> String) ## 11
+
+inc_n_times :: 1 = arg[0] + 2
+echo(inc_n_times(Number) >>> String) ## 12
+```
+
+**V) Loops & Checkpoints**
+
+Loop's are a relic of the past, and a very bad practice overall.  
+In Lea there are no loops, but you can achive the same output with checkpoints and recursion.
+
+1) Method with a Function
+    ```sh
+    ## You can recurse forever, because this language is actually built right
+
+    ## A function to print 1 to 5 forever
+    myRecursiveFunction :: 1
+    does
+        arg[0] = arg[0] + 1
+        if arg[0] > 5
+        does
+            arg[0] = 0
+        end
+
+        echo(arg[0] >>> String + "\n")
+        var result = myRecursiveFunction(arg[0])
+    end
+
+    myRecursiveFunction(0)
+    ```
+
+2) Method with a Checkpoint
+    ```sh
+    ## Note: Code doesnt belong to a checkpoint
+    ## A checkpoint is just a place in the code you can go to
+    ## Checkpoints cannot be overwritten to prevent unexpected behaviour
+
+    var number = 0
+
+    ## The same behaviour as before
+    ::Loop
+        number = number + 1
+        if number > 5
+        does
+            number = 0
+        end
+        
+        echo(number >>> String)
+        goto Loop
+
+    ```
