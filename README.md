@@ -135,3 +135,8 @@ In Lea there are no loops, but you can achive the same output with checkpoints a
         goto Loop
 
     ```
+
+**Just to piss you of, But true**
+
+This language was started just after the start of 2024 ... By a 14yo, without any help from AI  
+Bet ya pissed mate, massive skill issue! (you can open an issue on it, idc)
