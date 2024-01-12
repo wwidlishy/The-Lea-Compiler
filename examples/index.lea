@@ -1,7 +1,4 @@
-import stdlib
-
-text: String = "Hello, World!\n"
-firstChar: String = text[0] ## "H"
+var text = "Hello, World!\n"
+var char = text[0] ## "H"
 
 echo(firstChar)
-exit(0)

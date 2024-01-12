@@ -1,10 +1,6 @@
-import stdlib
-
 goto MyCheckpoint
 echo("I'usseless")
 
 ::MyCheckpoint
 echo("Hello, World!\n")
 goto MyLabel
-
-exit(0)

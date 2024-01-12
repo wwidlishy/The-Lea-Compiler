@@ -2,7 +2,7 @@
     Imports
 """
 import os, sys
-import asm
+import llvmgen
 import re
 
 """

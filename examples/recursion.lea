@@ -1,8 +1,6 @@
 ## You can recurse forever, because this language is actually built right
 
-import stdlib
-
-myRecursiveFunction Number 1:: Number
+myRecursiveFunction :: 1
 does
     arg[0] = arg[0] + 1
     if arg[0] > 5
@@ -11,8 +9,7 @@ does
     end
 
     echo(arg[0] >>> String + "\n")
-    result: Number = myRecursiveFunction(arg[0])
+    var result = myRecursiveFunction(arg[0])
 end
 
 myRecursiveFunction(0)
-exit(0) ## shouldn't happen

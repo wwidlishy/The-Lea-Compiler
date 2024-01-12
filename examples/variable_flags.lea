@@ -3,11 +3,10 @@
 ## Content of this variable is encrypted by a special generated one-time key.
 ## Might increase RAM usage by a few bytes
 ## Might slow runtime
-import stdlib
 
 ## It is just an variable, but safer and slower
 
-A: Encrypted String = 10
+enc var A = 10
 
 echo(A)
 
@@ -16,7 +15,12 @@ echo(A)
 ## It content cannot be changed in any way
 ## It can be freed and then assigned as an not constant
 
-A: Constant String = 10
+const var A = 10
 
 echo(A)
-exit(0)
+
+## If you really need to unconst a constant, you can do
+## deletes the original const, creates new with the came value
+
+var A = A
+A = A + 1

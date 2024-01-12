@@ -1,15 +1,16 @@
-import stdlib
-
-doSomeStuff Number 2:: Number, Number; does
-    result: Number = arg[0] + arg[1]
-end
-
-echo(doSomeStuff(3, 2))
-
-doSomeMoreStuff Number 2:: Number, Number
+doSomeStuff :: 2
 does
-    result: Number = arg[0] * arg[1]
+    var result = arg[0] + arg[1]
 end
 
-echo(doSomeMoreStuff (3, 2))
-exit(0)
+echo(doSomeStuff(3, 2) >>> String)
+
+doSomeMoreStuff :: 2
+does
+    var result = arg[0] * arg[1]
+end
+
+echo(doSomeMoreStuff (3, 2) >>> String)
+
+returnSomething :: 2 = arg[0] - arg[1]
+echo(returnSomething(5, 3) >>> String)
