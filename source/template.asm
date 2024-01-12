@@ -1,27 +1,25 @@
 ; Generated with lea
 
-@linux ; nasm -f elf $.asm -o $.o;
-@linux ; gcc -m32 $.o -o $;
-@windows ; nasm -f win32 $.asm -o $.o;
-@windows ; gcc -m32 $.o -o $.exe
+; nasm -f elf64 $.asm -o $.o
+; ld $.o -o $
+
+bits 64
 
 section .text
-@linux    global main
-@windows    global _main
 
-@linux    jmp main
-@windows    jmp _main
+global _start
+jmp _start
 
-; Functions
+##TempValues##
 
-$functions
+##Functions##
 
-; Temp Constants
+_start:
 
-$tempcontants
+##Body##
 
-; Body
-@linux main:
-@windows _main:
-$body
-    ret
+mov rax, 60
+mov rdi, 0
+syscall
+
+ret

@@ -3,6 +3,17 @@ Just an repo for my programming language im making in python
 (This is not a finished product and readme)  
 (May include concepts that are not finished yet!)  
 
+**I) Language's Concept**
+
+Lea has a [Bash](https://github.com/topics/bash) like strongly typed syntax.  
+However lacks the *_wierd_* bash syntax, and other unintuitive features.  
+Don't worry, we've got our own syntax bullshit. 😊    
+When I used other languages, I was quite annoyed that you can't recurse forever.  
+So, I decided to fix that.  
+In Lea, we don't give a fuck about recursion limit (It is gone!)
+
+Lea requires `nasm` and `ld` in the path to compile output, lea just generates assembly for linux
+
 **Functional Patterns**
 
 If you do not understand this syntax, check [Function Syntax](#functions)
@@ -18,17 +29,6 @@ end
 add_five :: 1 = arg[0] + 5
 function_caller(&add_five)
 ```
-
-**I) Language's Concept**
-
-Lea has a [Bash](https://github.com/topics/bash) like strongly typed syntax.  
-However lacks the *_wierd_* bash syntax, and other unintuitive features.  
-Don't worry, we've got our own syntax bullshit. 😊    
-When I used other languages, I was quite annoyed that you can't recurse forever.  
-So, I decided to fix that.  
-In Lea, we don't give a fuck about recursion limit (It is gone!)
-
-Lea requires `nasm` and `gcc` in the path to work properly
 
 **II) Variables**
 

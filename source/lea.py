@@ -2,7 +2,7 @@
     Imports
 """
 import os, sys
-import llvmgen
+import asm
 import re
 
 """
@@ -55,7 +55,7 @@ class Lexer:
                 elif self._curchar() in OPERS0:
                     self.mode = "operator"
                     self.current = ""
-                elif self._curchar() in "()[]{}":
+                elif self._curchar() in "()[]":
                     self.tokens.append(['special', self._curchar()])
                     continue
                 elif self._curchar() == '"':
@@ -212,6 +212,11 @@ class ORG:
                     self.pcounter_blayt = 1
                     self.current_blyat = []
                     continue
+                elif token == ['special', '[']:
+                    self.mode = 2
+                    self.pcounter_blayt = 1
+                    self.current_blyat = []
+                    continue
                 else:
                     self.order_blyat.append(token)
             if self.mode == 1:
@@ -225,7 +230,19 @@ class ORG:
                     self.order_blyat.append(['tuple', ORG().organize(self.current_blyat)])
                 else:
                     self.current_blyat.append(token)
-        if self.pcounter_blayt != 0: return Error("At $: Parentheses Error")
+            if self.mode == 2:
+                if token == ['special', '[']:
+                    self.pcounter_blayt += 1
+                if token == ['special', ']']:
+                    self.pcounter_blayt -= 1
+                
+                if self.pcounter_blayt == 0:
+                    self.mode = 0
+                    self.order_blyat.append(['list', ORG().organize(self.current_blyat)])
+                else:
+                    self.current_blyat.append(token)
+
+        if self.pcounter_blayt != 0: return Error("At $: Parentheses / Bracket Count Error")
 
         function_calls = self.checkforcon(self.order_blyat, ['keyword', 'tuple'])
         if len(function_calls) != 0:
@@ -284,10 +301,10 @@ class ORG:
     Run
 """
 
-if len(sys.argv) == 2:
+if len(sys.argv) == 3:
     pass
 else:
-    error = Error(f"Invalid usage: Insufficient Argument Count: Expected 1, but recived {len(sys.argv)-1}\nUsage: lea [input]")
+    error = Error(f"Invalid usage: Insufficient Argument Count: Expected 1, but recived {len(sys.argv)-1}\nUsage: lea [input] [assembly format: windows, linux, nosac]\nwindows = assembly for windows exe\nlinux = assemly for linux executable\nnosac = assembly for other")
     error.interupt()
 
 if os.path.exists(sys.argv[1]):
