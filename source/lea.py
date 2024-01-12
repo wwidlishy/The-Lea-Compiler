@@ -301,10 +301,10 @@ class ORG:
     Run
 """
 
-if len(sys.argv) == 3:
+if len(sys.argv) == 2:
     pass
 else:
-    error = Error(f"Invalid usage: Insufficient Argument Count: Expected 1, but recived {len(sys.argv)-1}\nUsage: lea [input] [assembly format: windows, linux, nosac]\nwindows = assembly for windows exe\nlinux = assemly for linux executable\nnosac = assembly for other")
+    error = Error(f"Invalid usage: Insufficient Argument Count: Expected 1, but recived {len(sys.argv)-1}\nUsage: lea [input]")
     error.interupt()
 
 if os.path.exists(sys.argv[1]):
@@ -322,4 +322,5 @@ order = loc.orderlns(tokens)
 org = ORG()
 organized = org.organize_all(order)
 
-print(organized)
+assembly = asm.gen_asm(sys.argv[1], organized)
+asm.gen_file(sys.argv[1], assembly)
